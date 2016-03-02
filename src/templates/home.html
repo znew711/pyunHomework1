@@ -1,6 +1,34 @@
-#html code
+{% include "css.html" %}
+{% include "javascript.html" %}
+
+{% if request.user.is_authenticated %}
+<!-- THIS IS WHERE AUTHENTICATED USERS WILL SEE -->
+<h1> Welcome {{ request.user }} </h1>
+<a href = "{% url 'logout' %}?next=/home/">Logout</a>
+
+{% else %}
+<!-- put login button here -->
+<h1>We are not logged in </h1>
+<form class = '' method = 'POST' action = '{% url "login" %}'>{% csrf_token %}
+	<input type = 'text' name = 'username' placeholder = 'Username' />
+	<input type = 'password' name = 'password' placeholder = 'Password' />
+	<button type = 'submit'>Login</button>
+</form>
+{% endif %}
+
 <h1> Hello World! </h1>
+
+<form method = 'POST' action = ''>{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" name="button1" value = "save"/>
+</form>
+
 <h1> {{ variable1 }} </h1>
 <h1> {{ variable2 }} </h1>
 <h1> {{ WOWTHISISAVARIABLE }} </h1>
+<h1> {{ all_objects }} </h1>
+
+<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
 
